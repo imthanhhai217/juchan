@@ -58,10 +58,17 @@
 body {
   font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   width: 360px;
-  min-height: 480px;
+  min-height: 500px;
+  max-height: 600px;
+  /* Giới hạn tối đa của Chrome Extension */
+  height: 100%;
+  /* Fill 100% chiều cao khả dụng */
   background: var(--gradient-bg);
   color: var(--text-primary);
-  overflow-x: hidden;
+  overflow: hidden;
+  /* Tránh scroll ở body */
+  display: flex;
+  flex-direction: column;
 }
 
 /* ============================================
@@ -70,9 +77,14 @@ body {
 .popup-container {
   display: flex;
   flex-direction: column;
-  min-height: 480px;
   padding: 16px;
   gap: 16px;
+  flex: 1;
+  /* Fill body */
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  /* Ngăn container tràn */
 }
 
 /* ============================================
@@ -169,10 +181,19 @@ body {
    Main Content
    ============================================ */
 .main-content {
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  flex: 1;
+  /* Chiếm hết không gian còn lại */
+  overflow-y: auto;
+  /* Scroll nếu nội dung dài quá max-height */
+  padding-right: 4px;
+  /* Tránh scrollbar đè content */
+  padding-bottom: 20px;
+  /* Padding dưới để không bị dính vào footer */
+  min-height: 0;
+  /* Quan trọng: Cho phép thu nhỏ để hiện scrollbar */
 }
 
 /* ============================================
@@ -589,7 +610,16 @@ input:focus+.slider {
   justify-content: space-between;
   align-items: center;
   padding-top: 12px;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+  /* KHÔNG CO LẠI */
+  background: rgba(26, 26, 46, 0.8);
+  /* Nền bán trong suốt tiệp màu nền */
+  backdrop-filter: blur(10px);
+  /* Hiệu ứng mờ che nội dung phía dưới */
+  position: relative;
+  z-index: 50;
+  margin-top: auto;
 }
 
 .btn-icon-only {
@@ -744,4 +774,20 @@ input:focus+.slider {
   margin-top: 0 !important;
   padding-top: 5px !important;
   border-top: none !important;
+  display: block !important;
+  /* FORCE SHOW */
+}
+
+/* FIX: Ensure API Config is always visible in settings tab */
+#apiConfig,
+.api-config {
+  display: block !important;
+  visibility: visible !important;
+  height: auto !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+}
+
+.api-section {
+  display: block !important;
 }

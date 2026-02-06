@@ -111,15 +111,27 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="batchSize">Batch Size</label>
-                    <input type="number" id="batchSize" value="10" min="1" max="50">
+                    <label for="batchSize">Batch Size: <span id="val-batchSize"
+                            class="slider-value-text">10</span></label>
+                    <div class="slider-wrapper">
+                        <div class="slider-track-bg"></div>
+                        <div class="slider-fill" id="fill-batchSize"></div>
+                        <div class="slider-thumb-custom" id="thumb-batchSize"></div>
+                        <input type="range" id="batchSize" value="10" min="1" max="50" class="range-slider">
+                    </div>
                     <span class="hint">Số lượng đoạn văn dịch cùng lúc (1-50)</span>
                 </div>
 
                 <div class="form-group">
-                    <label for="maxConcurrent">Max Concurrent</label>
-                    <input type="number" id="maxConcurrent" value="3" min="1" max="10">
-                    <span class="hint">Số request API đồng thời tối đa</span>
+                    <label for="maxConcurrent">Max Concurrent: <span id="val-maxConcurrent"
+                            class="slider-value-text">3</span></label>
+                    <div class="slider-wrapper">
+                        <div class="slider-track-bg"></div>
+                        <div class="slider-fill" id="fill-maxConcurrent"></div>
+                        <div class="slider-thumb-custom" id="thumb-maxConcurrent"></div>
+                        <input type="range" id="maxConcurrent" value="3" min="1" max="50" class="range-slider">
+                    </div>
+                    <span class="hint">Số request API đồng thời tối đa (1-50)</span>
                 </div>
             </section>
 
@@ -142,9 +154,15 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="cacheDuration">Thời gian cache (giờ)</label>
-                    <input type="number" id="cacheDuration" value="24" min="1" max="720">
-                    <span class="hint">Thời gian lưu cache trước khi hết hạn</span>
+                    <label for="cacheDuration">Thời gian cache: <span id="val-cacheDuration"
+                            class="slider-value-text">24</span> giờ</label>
+                    <div class="slider-wrapper">
+                        <div class="slider-track-bg"></div>
+                        <div class="slider-fill" id="fill-cacheDuration"></div>
+                        <div class="slider-thumb-custom" id="thumb-cacheDuration"></div>
+                        <input type="range" id="cacheDuration" value="24" min="1" max="720" class="range-slider">
+                    </div>
+                    <span class="hint">Thời gian lưu cache sử dụng lại bản dịch cũ</span>
                 </div>
 
                 <div class="form-group">

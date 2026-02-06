@@ -566,3 +566,161 @@ input:focus+.slider {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary);
 }
+
+/* ============================================
+   Hide Spin Buttons (Number Input)
+   ============================================ */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+/* ============================================
+   Custom Range Slider (Sakura Style - Full Custom)
+   ============================================ */
+.slider-wrapper {
+    position: relative;
+    height: 36px;
+    margin: 15px 0 10px 0;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    /* Gap chuẩn 16px (bằng bán kính hoa 32px/2) để hoa vừa chạm mép */
+    --side-gap: 16px;
+}
+
+/* Background Track (Xám) */
+.slider-track-bg {
+    position: absolute;
+    left: var(--side-gap);
+    right: var(--side-gap);
+    width: auto;
+    height: 8px;
+    background: var(--bg-input);
+    border-radius: 10px;
+    z-index: 1;
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+}
+
+/* Progress Fill (Gradient Tím Hồng) */
+.slider-fill {
+    position: absolute;
+    left: var(--side-gap);
+    /* Right không set vì width do JS chỉnh */
+    height: 8px;
+    background: linear-gradient(to right, #ff6b9d, #c084fc);
+    border-radius: 10px;
+    z-index: 2;
+    /* transition: width 0.05s linear; remove transition for sync movement */
+    pointer-events: none;
+}
+
+/* Custom Thumb (Bông hoa thật - DIV) */
+.slider-thumb-custom {
+    position: absolute;
+    top: 50%;
+    margin-top: -16px;
+    width: 32px;
+    height: 32px;
+
+    /* Hình Emoji 🌸 */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext x='50%25' y='55%25' font-size='24' text-anchor='middle' dominant-baseline='central'%3E%F0%9F%8C%B8%3C/text%3E%3C/svg%3E");
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    z-index: 4;
+    pointer-events: none;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: transform 0.1s;
+
+    /* Removed margin offset so JS calculates pure relative position */
+    margin-left: 0;
+}
+
+/* Input (Controller - Transparent & Hidden Thumb) */
+.range-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    /* Input spans FULL WIDTH to allow native thumb to travel correctly */
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    margin: 0;
+    padding: 0;
+    z-index: 3;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.range-slider:focus,
+.range-slider:active,
+.range-slider:hover {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+/* HIDE Default Thumb nhưng giữ kích thước để nhận click */
+.range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    opacity: 0;
+    /* Ẩn đi */
+    cursor: pointer;
+}
+
+/* Hover Effect lên Wrapper thì active Thumb giả */
+.slider-wrapper:hover .slider-thumb-custom {
+    transform: scale(1.2) rotate(15deg);
+    filter: drop-shadow(0 0 10px rgba(255, 107, 157, 0.5));
+}
+
+/* Track Style - Webkit (Transparent) */
+.range-slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 32px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+}
+
+/* Value Badge Style */
+.slider-value-text {
+    font-weight: 700;
+    font-size: 14px;
+    /* ... tiếp theo là phần dưới giữ nguyên ... */
+
+    /* Value Badge Style */
+    .slider-value-text {
+        font-weight: 700;
+        font-size: 14px;
+        color: #fff;
+        margin-left: 10px;
+        padding: 2px 10px;
+        background: var(--gradient-primary);
+        border-radius: 12px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        display: inline-block;
+        min-width: 32px;
+        text-align: center;
+    }

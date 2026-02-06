@@ -65,6 +65,66 @@
             </label>
           </div>
         </section>
+
+        <!-- Language Selection -->
+        <section class="control-section">
+          <h2 class="section-title">Ngôn ngữ</h2>
+          <div class="language-selector">
+            <div class="lang-box">
+              <label for="sourceLang">Nguồn</label>
+              <select id="sourceLang">
+                <option value="auto">Tự động</option>
+                <option value="en">English</option>
+                <option value="ja">日本語</option>
+                <option value="ko">한국어</option>
+                <option value="zh">中文</option>
+                <option value="vi">Tiếng Việt</option>
+              </select>
+            </div>
+            <div class="lang-arrow">→</div>
+            <div class="lang-box">
+              <label for="targetLang">Đích</label>
+              <select id="targetLang">
+                <option value="vi" selected>Tiếng Việt</option>
+                <option value="en">English</option>
+                <option value="ja">日本語</option>
+                <option value="ko">한국어</option>
+                <option value="zh">中文</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="control-section">
+          <h2 class="section-title">Thao tác nhanh</h2>
+          <div class="action-buttons">
+            <button class="btn btn-primary" id="btnTranslateNow">
+              <span class="btn-icon">🔄</span>
+              Dịch ngay
+            </button>
+            <button class="btn btn-secondary" id="btnRestore">
+              <span class="btn-icon">↩️</span>
+              Khôi phục
+            </button>
+          </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="stats-section">
+          <div class="stat-item">
+            <span class="stat-value" id="statTexts">0</span>
+            <span class="stat-label">Đoạn văn</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="statImages">0</span>
+            <span class="stat-label">Ảnh</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value" id="statTime">0s</span>
+            <span class="stat-label">Thời gian</span>
+          </div>
+        </section>
       </div>
 
       <!-- TAB 2: API Configuration -->
@@ -105,66 +165,6 @@
           </div>
         </section>
       </div>
-
-      <!-- Language Selection -->
-      <section class="control-section">
-        <h2 class="section-title">Ngôn ngữ</h2>
-        <div class="language-selector">
-          <div class="lang-box">
-            <label for="sourceLang">Nguồn</label>
-            <select id="sourceLang">
-              <option value="auto">Tự động</option>
-              <option value="en">English</option>
-              <option value="ja">日本語</option>
-              <option value="ko">한국어</option>
-              <option value="zh">中文</option>
-              <option value="vi">Tiếng Việt</option>
-            </select>
-          </div>
-          <div class="lang-arrow">→</div>
-          <div class="lang-box">
-            <label for="targetLang">Đích</label>
-            <select id="targetLang">
-              <option value="vi" selected>Tiếng Việt</option>
-              <option value="en">English</option>
-              <option value="ja">日本語</option>
-              <option value="ko">한국어</option>
-              <option value="zh">中文</option>
-            </select>
-          </div>
-        </div>
-      </section>
-
-      <!-- Quick Actions -->
-      <section class="control-section">
-        <h2 class="section-title">Thao tác nhanh</h2>
-        <div class="action-buttons">
-          <button class="btn btn-primary" id="btnTranslateNow">
-            <span class="btn-icon">🔄</span>
-            Dịch ngay
-          </button>
-          <button class="btn btn-secondary" id="btnRestore">
-            <span class="btn-icon">↩️</span>
-            Khôi phục
-          </button>
-        </div>
-      </section>
-
-      <!-- Stats -->
-      <section class="stats-section">
-        <div class="stat-item">
-          <span class="stat-value" id="statTexts">0</span>
-          <span class="stat-label">Đoạn văn</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-value" id="statImages">0</span>
-          <span class="stat-label">Ảnh</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-value" id="statTime">0s</span>
-          <span class="stat-label">Thời gian</span>
-        </div>
-      </section>
     </main>
 
     <!-- Footer -->

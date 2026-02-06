@@ -318,8 +318,10 @@ function setupEventListeners() {
     elements.toggleLazyTranslate.addEventListener('change', saveSettings);
 
     // Button listeners
-    elements.btnTranslate.addEventListener('click', translateNow);
+    elements.btnTranslateNow.addEventListener('click', translateNow);
     elements.btnRestore.addEventListener('click', restorePage);
+    elements.btnSettings.addEventListener('click', openSettings);
+    elements.btnHelp.addEventListener('click', openHelp);
 
     // API listeners
     elements.apiType.addEventListener('change', applyApiPreset);
@@ -343,20 +345,31 @@ function setupEventListeners() {
     });
 
     // Tab switching logic
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    console.log('Juchan: Found tab buttons:', tabBtns.length);
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default button behavior
+            console.log('Juchan: Tab clicked:', btn.textContent);
+
+            const tabId = btn.getAttribute('data-tab');
+            const targetTab = document.getElementById(tabId);
+
+            if (!targetTab) {
+                console.error('Juchan: Target tab not found:', tabId);
+                return;
+            }
+
             // Remove active class from all buttons and contents
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
 
             // Add active class to clicked button
             btn.classList.add('active');
+            targetTab.classList.add('active');
 
-            // Show corresponding content
-            const tabId = btn.getAttribute('data-tab');
-            document.getElementById(tabId).classList.add('active');
-
-            // Save tab state? (optional, maybe not needed for simple popup)
+            console.log('Juchan: Switched to tab', tabId);
         });
     });
 }

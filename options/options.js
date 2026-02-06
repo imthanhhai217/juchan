@@ -429,6 +429,68 @@ function setupEventListeners() {
             }
         });
     });
+
+    // Slider Listeners (Real-time update)
+    ['batchSize', 'maxConcurrent', 'cacheDuration'].forEach(id => {
+        const input = elements[id];
+        const display = document.getElementById('val-' + id);
+
+        const updateSlider = () => {
+            // Update text
+            if (display) display.textContent = input.value;
+
+            // Full Custom Logic
+            const min = parseFloat(input.min) || 0;
+            const max = parseFloat(input.max) || 100;
+            const val = parseFloat(input.value) || 0;
+            const ratio = (val - min) / (max - min);
+
+            /* 
+               DOM Elements
+               We have hidden input, custom fill bar, and custom thumb div.
+               We move the thumb div and resize the fill bar manually.
+            */
+            if (input.offsetWidth > 0) {
+                const thumbWidth = 32;
+                const trackWidth = input.offsetWidth;
+                const availableTravel = trackWidth - thumbWidth;
+
+                // Calculate position relative to left (0 to 100% of usable space)
+                // With full width input, 0 pos is left=0.
+                const leftPosPx = ratio * availableTravel;
+
+                // 1. Move the Custom Thumb
+                const thumbEl = document.getElementById('thumb-' + id);
+                if (thumbEl) {
+                    thumbEl.style.left = `${leftPosPx}px`;
+                }
+
+                // 2. Resize the Fill Bar
+                // Fill Visual Start is 16px (CSS). 
+                // Thumb Center is (leftPosPx + 16px).
+                // Width = Center - Start = leftPosPx.
+                const fillWidthPx = leftPosPx;
+
+                const fillEl = document.getElementById('fill-' + id);
+                if (fillEl) {
+                    fillEl.style.width = `${fillWidthPx}px`;
+                }
+            }
+
+            // Clean up old styles
+            input.style.background = 'transparent';
+        };
+
+        if (input) {
+            input.addEventListener('input', updateSlider);
+            window.addEventListener('resize', updateSlider); // Responsive fix
+
+            // Init immediately and delayed to catch offsetWidth
+            updateSlider();
+            setTimeout(updateSlider, 100);
+            setTimeout(updateSlider, 500);
+        }
+    });
 }
 
 // Initialize when DOM is ready

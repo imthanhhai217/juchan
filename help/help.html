@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juchan - Hướng dẫn sử dụng</title>
+    <style>
+        :root {
+            --primary: #ff6b9d;
+            --bg-primary: #0a0a12;
+            --bg-secondary: #12121f;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b8;
+            --text-muted: #6b6b80;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --gradient-primary: linear-gradient(135deg, #ff6b9d 0%, #c084fc 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #0a0a12 0%, #12121f 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .logo-icon {
+            font-size: 64px;
+            display: block;
+            margin-bottom: 16px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+        }
+
+        section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin: 24px 0 12px;
+            color: var(--primary);
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        ul,
+        ol {
+            margin-left: 24px;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        code {
+            background: rgba(255, 107, 157, 0.1);
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 14px;
+        }
+
+        pre {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: var(--text-primary);
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 16px 0;
+        }
+
+        .tip strong {
+            color: #10b981;
+        }
+
+        .warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid #f59e0b;
+            padding: 16px 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 16px 0;
+        }
+
+        .warning strong {
+            color: #f59e0b;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.25s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        .feature-card .icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h4 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding-top: 32px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 24px 16px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <span class="logo-icon">🌸</span>
+            <h1>Juchan</h1>
+            <p class="subtitle">Hướng dẫn sử dụng AI Auto Translator</p>
+        </header>
+
+        <section>
+            <h2>🚀 Bắt đầu nhanh</h2>
+            <p>Juchan là extension dịch tự động sử dụng AI LLM. Hỗ trợ dịch văn bản trên trang web và text trong ảnh
+                (manga, comic).</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">📝</div>
+                    <h4>Dịch văn bản</h4>
+                    <p>Tự động dịch tất cả text trên trang web với khả năng đè lên nội dung gốc.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🖼️</div>
+                    <h4>Dịch ảnh</h4>
+                    <p>OCR và dịch text trong ảnh, hiển thị overlay đúng vị trí (manga, comic).</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🔄</div>
+                    <h4>Lazy Translate</h4>
+                    <p>Chỉ dịch nội dung khi cuộn vào viewport, tiết kiệm API calls.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🤖</div>
+                    <h4>AI LLM Local</h4>
+                    <p>Sử dụng Ollama hoặc bất kỳ API LLM nào chạy local.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>⚙️ Cài đặt API</h2>
+
+            <h3>Sử dụng Ollama (Khuyến nghị)</h3>
+            <ol>
+                <li>Tải và cài đặt <a href="https://ollama.ai" target="_blank">Ollama</a></li>
+                <li>Mở terminal và chạy: <code>ollama pull llama2</code> (hoặc model bạn muốn)</li>
+                <li>Đảm bảo Ollama đang chạy (mặc định port 11434)</li>
+                <li>Trong Juchan Options, chọn API Type: <strong>Ollama</strong></li>
+                <li>Endpoint mặc định: <code>http://localhost:11434/api/generate</code></li>
+            </ol>
+
+            <div class="tip">
+                <strong>💡 Tip:</strong> Để dịch ảnh (manga), cần model vision như <code>llava</code>. Chạy:
+                <code>ollama pull llava</code>
+            </div>
+
+            <h3>Model khuyến nghị cho dịch thuật</h3>
+            <ul>
+                <li><code>llama2</code> - Tốc độ nhanh, chất lượng khá</li>
+                <li><code>mistral</code> - Chất lượng tốt, đa ngôn ngữ</li>
+                <li><code>qwen2</code> - Hỗ trợ tốt tiếng Trung, Việt</li>
+                <li><code>llava</code> - Cần thiết cho dịch ảnh</li>
+            </ul>
+
+            <h3>Sử dụng OpenAI API</h3>
+            <ol>
+                <li>Trong Options, chọn API Type: <strong>OpenAI Compatible</strong></li>
+                <li>Nhập endpoint: <code>https://api.openai.com/v1/chat/completions</code></li>
+                <li>Nhập API Key của bạn</li>
+                <li>Model: <code>gpt-3.5-turbo</code> hoặc <code>gpt-4</code></li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>📖 Cách sử dụng</h2>
+
+            <h3>Dịch trang web</h3>
+            <ol>
+                <li>Click icon Juchan trên thanh toolbar</li>
+                <li>Bật toggle "Dịch trang web"</li>
+                <li>Nhấn nút "Dịch ngay" để dịch toàn bộ trang</li>
+                <li>Hoặc bật "Lazy Translate" để tự động dịch khi cuộn</li>
+            </ol>
+
+            <h3>Dịch ảnh Manga/Comic</h3>
+            <ol>
+                <li>Đảm bảo đã cấu hình Vision Model (llava)</li>
+                <li>Bật toggle "Dịch ảnh (Manga/Comic)"</li>
+                <li>Nhấn "Dịch ngay"</li>
+                <li>Text overlay sẽ được thêm vào vị trí tương ứng</li>
+                <li>Click vào overlay để xem text gốc</li>
+            </ol>
+
+            <h3>Menu chuột phải</h3>
+            <p>Chọn text bất kỳ trên trang → Nhấn chuột phải → Chọn "Dịch với Juchan"</p>
+
+            <h3>Khôi phục trang gốc</h3>
+            <p>Nhấn nút "Khôi phục" trong popup để xóa tất cả bản dịch và trở về nội dung gốc.</p>
+        </section>
+
+        <section>
+            <h2>🔧 Cài đặt nâng cao</h2>
+
+            <h3>Cache dịch</h3>
+            <p>Juchan lưu cache bản dịch để tái sử dụng, giúp tiết kiệm API calls và tăng tốc độ. Bạn có thể:</p>
+            <ul>
+                <li>Bật/tắt cache trong Options</li>
+                <li>Điều chỉnh thời gian cache (mặc định 24 giờ)</li>
+                <li>Xóa cache thủ công khi cần</li>
+            </ul>
+
+            <h3>Custom Prompt</h3>
+            <p>Bạn có thể tùy chỉnh prompt gửi đến AI. Sử dụng các placeholder:</p>
+            <ul>
+                <li><code>{text}</code> - Văn bản cần dịch</li>
+                <li><code>{source}</code> - Ngôn ngữ nguồn</li>
+                <li><code>{target}</code> - Ngôn ngữ đích</li>
+            </ul>
+
+            <h3>Loại trừ trang web</h3>
+            <p>Thêm domain vào danh sách loại trừ để ngăn Juchan tự động dịch trên các trang đó.</p>
+        </section>
+
+        <section>
+            <h2>❓ Câu hỏi thường gặp</h2>
+
+            <h3>Tại sao dịch chậm?</h3>
+            <p>Tốc độ phụ thuộc vào hardware và model. Thử dùng model nhẹ hơn như <code>llama2:7b</code> thay vì
+                <code>llama2:13b</code>.</p>
+
+            <h3>Lỗi kết nối API?</h3>
+            <ul>
+                <li>Đảm bảo Ollama đang chạy</li>
+                <li>Kiểm tra endpoint đúng</li>
+                <li>Thử test kết nối trong Options</li>
+            </ul>
+
+            <h3>Dịch ảnh không hoạt động?</h3>
+            <ul>
+                <li>Cần model vision (llava)</li>
+                <li>Một số ảnh CORS protected không thể đọc</li>
+                <li>Ảnh quá nhỏ (< 100px) sẽ bị bỏ qua</li>
+            </ul>
+
+            <div class="warning">
+                <strong>⚠️ Lưu ý:</strong> Dịch ảnh sử dụng nhiều tài nguyên hơn. Đảm bảo máy có đủ RAM/VRAM.
+            </div>
+        </section>
+
+        <section>
+            <h2>⌨️ Phím tắt</h2>
+            <p>Hiện tại Juchan chưa hỗ trợ phím tắt. Tính năng này sẽ được thêm trong phiên bản sau.</p>
+        </section>
+
+        <footer>
+            <p>Juchan v1.0.0 | Made with 🌸 for manga lovers</p>
+            <p>
+                <a href="https://github.com" target="_blank">GitHub</a> ·
+                <a href="#" onclick="chrome.runtime.openOptionsPage()">Cài đặt</a>
+            </p>
+        </footer>
+    </div>
+</body>
+
+</html>

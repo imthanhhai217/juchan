@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Generate Juchan Icons</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background: #1a1a2e;
+            color: #fff;
+        }
+
+        .icon-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        canvas {
+            border: 1px solid #333;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #ff6b9d, #c084fc);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            color: #ff6b9d;
+        }
+
+        a {
+            color: #ff6b9d;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🌸 Juchan Icon Generator</h1>
+    <p>Click các nút bên dưới để tải xuống PNG icons.</p>
+
+    <div class="icon-container">
+        <div>
+            <canvas id="icon128" width="128" height="128"></canvas>
+            <br><button onclick="download('icon128')">Download 128x128</button>
+        </div>
+        <div>
+            <canvas id="icon48" width="48" height="48"></canvas>
+            <br><button onclick="download('icon48')">Download 48x48</button>
+        </div>
+        <div>
+            <canvas id="icon32" width="32" height="32"></canvas>
+            <br><button onclick="download('icon32')">Download 32x32</button>
+        </div>
+        <div>
+            <canvas id="icon16" width="16" height="16"></canvas>
+            <br><button onclick="download('icon16')">Download 16x16</button>
+        </div>
+    </div>
+
+    <button onclick="downloadAll()">📥 Download All</button>
+
+    <h2>Hướng dẫn</h2>
+    <ol>
+        <li>Mở file này trong trình duyệt (File > Open)</li>
+        <li>Click "Download All" để tải tất cả icons</li>
+        <li>Copy các file PNG vào thư mục <code>icons/</code></li>
+        <li>Load extension vào Chrome</li>
+    </ol>
+
+    <script>
+        const sizes = [128, 48, 32, 16];
+
+        function drawIcon(canvas) {
+            const ctx = canvas.getContext('2d');
+            const size = canvas.width;
+            const center = size / 2;
+            const radius = size * 0.47;
+
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#ff6b9d');
+            gradient.addColorStop(1, '#c084fc');
+
+            // Draw circle background
+            ctx.beginPath();
+            ctx.arc(center, center, radius, 0, Math.PI * 2);
+            ctx.fillStyle = gradient;
+            ctx.fill();
+
+            // Draw sakura petals
+            const petalLength = size * 0.28;
+            const petalWidth = size * 0.12;
+
+            ctx.fillStyle = 'white';
+            for (let i = 0; i < 5; i++) {
+                const angle = (i * 72 - 90) * Math.PI / 180;
+                ctx.save();
+                ctx.translate(center, center);
+                ctx.rotate(angle);
+
+                ctx.beginPath();
+                ctx.moveTo(0, -petalLength);
+                ctx.quadraticCurveTo(petalWidth, -petalLength * 0.7, petalWidth * 0.6, -petalLength * 0.3);
+                ctx.quadraticCurveTo(petalWidth * 0.3, -petalLength * 0.1, 0, -petalLength * 0.1);
+                ctx.quadraticCurveTo(-petalWidth * 0.3, -petalLength * 0.1, -petalWidth * 0.6, -petalLength * 0.3);
+                ctx.quadraticCurveTo(-petalWidth, -petalLength * 0.7, 0, -petalLength);
+                ctx.fill();
+
+                ctx.restore();
+            }
+
+            // Draw center
+            ctx.beginPath();
+            ctx.arc(center, center, size * 0.08, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffb6c1';
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(center, center, size * 0.04, 0, Math.PI * 2);
+            ctx.fillStyle = '#ff6b9d';
+            ctx.fill();
+        }
+
+        // Draw all icons
+        sizes.forEach(size => {
+            const canvas = document.getElementById('icon' + size);
+            drawIcon(canvas);
+        });
+
+        function download(id) {
+            const canvas = document.getElementById(id);
+            const link = document.createElement('a');
+            link.download = id + '.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        function downloadAll() {
+            sizes.forEach(size => {
+                setTimeout(() => download('icon' + size), size * 10);
+            });
+        }
+    </script>
+</body>
+
+</html>

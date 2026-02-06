@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juchan Translator</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">🌸</span>
+        <h1>Juchan</h1>
+      </div>
+      <div class="status-indicator" id="statusIndicator">
+        <span class="status-dot"></span>
+        <span class="status-text">Sẵn sàng</span>
+      </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="tab-translate">Dịch</button>
+      <button class="tab-btn" data-tab="tab-settings">Cấu hình</button>
+    </div>
+
+    <!-- Main Controls -->
+    <main class="main-content">
+
+      <!-- TAB 1: Translation Controls -->
+      <div id="tab-translate" class="tab-content active">
+        <!-- Translation Toggle -->
+        <section class="control-section">
+          <div class="toggle-group">
+            <label class="toggle-label">
+              <span class="label-text">Dịch trang web</span>
+              <div class="toggle-switch">
+                <input type="checkbox" id="togglePageTranslate" checked>
+                <span class="slider"></span>
+              </div>
+            </label>
+          </div>
+
+          <div class="toggle-group">
+            <label class="toggle-label">
+              <span class="label-text">Dịch ảnh (Manga/Comic)</span>
+              <div class="toggle-switch">
+                <input type="checkbox" id="toggleImageTranslate">
+                <span class="slider"></span>
+              </div>
+            </label>
+          </div>
+
+          <div class="toggle-group">
+            <label class="toggle-label">
+              <span class="label-text">Lazy Translate (cuộn chuột)</span>
+              <div class="toggle-switch">
+                <input type="checkbox" id="toggleLazyTranslate" checked>
+                <span class="slider"></span>
+              </div>
+            </label>
+          </div>
+        </section>
+      </div>
+
+      <!-- TAB 2: API Configuration -->
+      <div id="tab-settings" class="tab-content">
+        <section class="control-section api-section" style="border: none; padding: 0;">
+          <div class="api-config" id="apiConfig" style="display: block; padding-top: 10px;">
+            <div class="form-row">
+              <label for="apiType">Loại API</label>
+              <select id="apiType">
+                <option value="ollama">Ollama (Local)</option>
+                <option value="mymemory">MyMemory (Free)</option>
+                <option value="openai">OpenAI</option>
+                <option value="gemini">Google Gemini</option>
+                <option value="anthropic">Anthropic Claude</option>
+                <option value="groq">Groq</option>
+                <option value="custom">Custom API</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="apiEndpoint">API Endpoint</label>
+              <input type="url" id="apiEndpoint" placeholder="http://localhost:11434/api/generate">
+            </div>
+            <div class="form-row">
+              <label for="apiModel">Model</label>
+              <input type="text" id="apiModel" placeholder="llama2">
+            </div>
+            <div class="form-row">
+              <label for="apiKey">API Key</label>
+              <div class="input-with-toggle">
+                <input type="password" id="apiKey" placeholder="sk-... hoặc để trống nếu local">
+                <button class="btn-toggle-visibility" id="btnToggleKey" title="Hiện/Ẩn">👁️</button>
+              </div>
+            </div>
+            <div class="form-row api-status">
+              <button class="btn btn-small btn-test" id="btnTestApi">🔍 Test Kết Nối</button>
+              <span class="api-status-text" id="apiStatusText"></span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Language Selection -->
+      <section class="control-section">
+        <h2 class="section-title">Ngôn ngữ</h2>
+        <div class="language-selector">
+          <div class="lang-box">
+            <label for="sourceLang">Nguồn</label>
+            <select id="sourceLang">
+              <option value="auto">Tự động</option>
+              <option value="en">English</option>
+              <option value="ja">日本語</option>
+              <option value="ko">한국어</option>
+              <option value="zh">中文</option>
+              <option value="vi">Tiếng Việt</option>
+            </select>
+          </div>
+          <div class="lang-arrow">→</div>
+          <div class="lang-box">
+            <label for="targetLang">Đích</label>
+            <select id="targetLang">
+              <option value="vi" selected>Tiếng Việt</option>
+              <option value="en">English</option>
+              <option value="ja">日本語</option>
+              <option value="ko">한국어</option>
+              <option value="zh">中文</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Actions -->
+      <section class="control-section">
+        <h2 class="section-title">Thao tác nhanh</h2>
+        <div class="action-buttons">
+          <button class="btn btn-primary" id="btnTranslateNow">
+            <span class="btn-icon">🔄</span>
+            Dịch ngay
+          </button>
+          <button class="btn btn-secondary" id="btnRestore">
+            <span class="btn-icon">↩️</span>
+            Khôi phục
+          </button>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section class="stats-section">
+        <div class="stat-item">
+          <span class="stat-value" id="statTexts">0</span>
+          <span class="stat-label">Đoạn văn</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="statImages">0</span>
+          <span class="stat-label">Ảnh</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="statTime">0s</span>
+          <span class="stat-label">Thời gian</span>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <button class="btn-icon-only" id="btnSettings" title="Cài đặt">⚙️</button>
+      <span class="version">v1.0.0</span>
+      <button class="btn-icon-only" id="btnHelp" title="Trợ giúp">❓</button>
+    </footer>
+  </div>
+
+  <script src="popup.js" type="module"></script>
+</body>
+
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juchan - Cài đặt</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+
+<body>
+    <div class="options-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🌸</span>
+                <div class="logo-text">
+                    <h1>Juchan</h1>
+                    <span class="tagline">AI Auto Translator</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- API Configuration -->
+            <section class="settings-section">
+                <div class="section-header">
+                    <h2>🔌 Cấu hình API</h2>
+                    <p>Kết nối với AI LLM của bạn</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="apiType">Loại API</label>
+                    <select id="apiType">
+                        <option value="ollama">Ollama (Local)</option>
+                        <option value="mymemory">MyMemory (Free)</option>
+                        <option value="openai">OpenAI</option>
+                        <option value="gemini">Google Gemini</option>
+                        <option value="anthropic">Anthropic Claude</option>
+                        <option value="groq">Groq</option>
+                        <option value="custom">Custom API</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="apiEndpoint">API Endpoint</label>
+                    <input type="url" id="apiEndpoint" placeholder="http://localhost:11434/api/generate">
+                    <span class="hint">Địa chỉ API của bạn (ví dụ: Ollama mặc định là localhost:11434)</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="apiModel">Model</label>
+                    <select id="apiModel">
+                        <option value="">-- Chọn Model --</option>
+                    </select>
+                    <span class="hint">Model dịch văn bản</span>
+                </div>
+
+                <div class="form-group" id="visionModelGroup">
+                    <label for="visionModel">Vision Model (OCR)</label>
+                    <select id="visionModel">
+                        <option value="">-- Chọn Vision Model --</option>
+                    </select>
+                    <span class="hint">Model có khả năng đọc ảnh</span>
+                </div>
+
+                <div class="form-group" id="apiKeyGroup">
+                    <label for="apiKey">API Key</label>
+                    <input type="password" id="apiKey"
+                        placeholder="Nhập API key của bạn (bỏ trống nếu dùng Ollama local)">
+                    <span class="hint">API key cho OpenAI, Gemini, Claude, Groq hoặc các dịch vụ tương tự</span>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-secondary" id="btnTestApi">
+                        <span class="btn-icon">🔍</span>
+                        Test Kết Nối
+                    </button>
+                    <span class="test-result" id="testResult"></span>
+                </div>
+            </section>
+
+            <!-- Translation Settings -->
+            <section class="settings-section">
+                <div class="section-header">
+                    <h2>🌐 Cài đặt dịch</h2>
+                    <p>Tùy chỉnh hành vi dịch</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="defaultSourceLang">Ngôn ngữ nguồn mặc định</label>
+                    <select id="defaultSourceLang">
+                        <option value="auto">Tự động phát hiện</option>
+                        <option value="en">English</option>
+                        <option value="ja">日本語 (Japanese)</option>
+                        <option value="ko">한국어 (Korean)</option>
+                        <option value="zh">中文 (Chinese)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="defaultTargetLang">Ngôn ngữ đích mặc định</label>
+                    <select id="defaultTargetLang">
+                        <option value="vi" selected>Tiếng Việt</option>
+                        <option value="en">English</option>
+                        <option value="ja">日本語 (Japanese)</option>
+                        <option value="ko">한국어 (Korean)</option>
+                        <option value="zh">中文 (Chinese)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="batchSize">Batch Size</label>
+                    <input type="number" id="batchSize" value="10" min="1" max="50">
+                    <span class="hint">Số lượng đoạn văn dịch cùng lúc (1-50)</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="maxConcurrent">Max Concurrent</label>
+                    <input type="number" id="maxConcurrent" value="3" min="1" max="10">
+                    <span class="hint">Số request API đồng thời tối đa</span>
+                </div>
+            </section>
+
+            <!-- Advanced Settings -->
+            <section class="settings-section">
+                <div class="section-header">
+                    <h2>⚙️ Cài đặt nâng cao</h2>
+                    <p>Tùy chọn bổ sung</p>
+                </div>
+
+                <div class="toggle-group">
+                    <label class="toggle-label">
+                        <span class="label-text">Bật cache dịch</span>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="cacheEnabled" checked>
+                            <span class="slider"></span>
+                        </div>
+                    </label>
+                    <span class="hint">Lưu bản dịch để tái sử dụng, tiết kiệm API calls</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="cacheDuration">Thời gian cache (giờ)</label>
+                    <input type="number" id="cacheDuration" value="24" min="1" max="720">
+                    <span class="hint">Thời gian lưu cache trước khi hết hạn</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="customPrompt">Custom System Prompt</label>
+                    <textarea id="customPrompt" rows="4"
+                        placeholder="Để trống để sử dụng prompt mặc định..."></textarea>
+                    <span class="hint">Prompt tùy chỉnh cho AI. Sử dụng {text}, {source}, {target} làm
+                        placeholder.</span>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-danger" id="btnClearCache">
+                        <span class="btn-icon">🗑️</span>
+                        Xóa Cache
+                    </button>
+                </div>
+            </section>
+
+            <!-- Excluded Sites -->
+            <section class="settings-section">
+                <div class="section-header">
+                    <h2>🚫 Trang web loại trừ</h2>
+                    <p>Các trang không tự động dịch</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="excludedSites">Danh sách trang loại trừ</label>
+                    <textarea id="excludedSites" rows="5"
+                        placeholder="Mỗi dòng một domain, ví dụ:&#10;google.com&#10;facebook.com&#10;*.example.org"></textarea>
+                    <span class="hint">Mỗi dòng một domain hoặc pattern (hỗ trợ wildcard *)</span>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer Actions -->
+        <footer class="footer">
+            <div class="footer-info">
+                <span class="version">Juchan v1.0.0</span>
+                <a href="#" id="linkHelp">Trợ giúp</a>
+                <a href="#" id="linkAbout">Giới thiệu</a>
+            </div>
+            <div class="footer-actions">
+                <button class="btn btn-secondary" id="btnReset">
+                    Đặt lại mặc định
+                </button>
+                <button class="btn btn-primary" id="btnSave">
+                    <span class="btn-icon">💾</span>
+                    Lưu cài đặt
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message">Đã lưu cài đặt</span>
+    </div>
+
+    <script src="options.js" type="module"></script>
+</body>
+
+</html>
